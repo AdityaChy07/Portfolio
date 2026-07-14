@@ -33,3 +33,44 @@ body {
 ::-webkit-scrollbar-track {
   background: #111827;
 }
+
+
+/* =========================
+   DARK THEME
+========================= */
+
+html.dark{
+  --bg-primary:#020617;
+  --bg-secondary:#0f172a;
+  --bg-card:#1e293b;
+
+  --text-primary:#ffffff;
+  --text-secondary:#94a3b8;
+
+  --border:#334155;
+
+  --accent:#22d3ee;
+}
+
+/* =========================
+   LIGHT THEME
+========================= */
+
+html.light{
+  --bg-primary:#f8fafc;
+  --bg-secondary:#ffffff;
+  --bg-card:#e2e8f0;
+
+  --text-primary:#0f172a;
+  --text-secondary:#475569;
+
+  --border:#cbd5e1;
+
+  --accent:#0891b2;
+}
+
+body{
+  background:var(--bg-primary);
+  color:var(--text-primary);
+  transition:.35s ease;
+}

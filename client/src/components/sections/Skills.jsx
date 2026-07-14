@@ -7,7 +7,7 @@ import {
   FaCss3Alt,
   FaGitAlt,
   FaGithub,
-  FaJava,
+  FaFigma,
 } from "react-icons/fa";
 
 import {
@@ -15,113 +15,104 @@ import {
   SiTailwindcss,
   SiExpress,
   SiMongodb,
-  SiPython,
-  SiCplusplus,
+  SiPostman,
 } from "react-icons/si";
 
-const skills = [
+import { VscVscode } from "react-icons/vsc";
+
+const skillCategories = [
   {
-    name: "React",
-    icon: <FaReact size={50} />,
-    color: "text-cyan-400",
-    category: "Frontend",
-    percent: 90,
+    title: "Frontend",
+    skills: [
+      {
+        name: "React.js",
+        icon: <FaReact className="text-sky-400" />,
+        level: 95,
+      },
+      {
+        name: "JavaScript",
+        icon: <SiJavascript className="text-yellow-400" />,
+        level: 92,
+      },
+      {
+        name: "HTML5",
+        icon: <FaHtml5 className="text-orange-500" />,
+        level: 95,
+      },
+      {
+        name: "CSS3",
+        icon: <FaCss3Alt className="text-blue-500" />,
+        level: 90,
+      },
+      {
+        name: "Tailwind CSS",
+        icon: <SiTailwindcss className="text-cyan-400" />,
+        level: 92,
+      },
+    ],
   },
 
   {
-    name: "JavaScript",
-    icon: <SiJavascript size={50} />,
-    color: "text-yellow-400",
-    category: "Frontend",
-    percent: 92,
+    title: "Backend",
+    skills: [
+      {
+        name: "Node.js",
+        icon: <FaNodeJs className="text-green-500" />,
+        level: 88,
+      },
+      {
+        name: "Express.js",
+        icon: <SiExpress />,
+        level: 85,
+      },
+      {
+        name: "REST API",
+        icon: "🚀",
+        level: 86,
+      },
+    ],
   },
 
   {
-    name: "HTML5",
-    icon: <FaHtml5 size={50} />,
-    color: "text-orange-500",
-    category: "Frontend",
-    percent: 95,
+    title: "Database",
+    skills: [
+      {
+        name: "MongoDB",
+        icon: <SiMongodb className="text-green-400" />,
+        level: 88,
+      },
+    ],
   },
 
   {
-    name: "CSS3",
-    icon: <FaCss3Alt size={50} />,
-    color: "text-blue-500",
-    category: "Frontend",
-    percent: 90,
-  },
-
-  {
-    name: "Tailwind",
-    icon: <SiTailwindcss size={50} />,
-    color: "text-cyan-300",
-    category: "Frontend",
-    percent: 90,
-  },
-
-  {
-    name: "Node.js",
-    icon: <FaNodeJs size={50} />,
-    color: "text-green-500",
-    category: "Backend",
-    percent: 85,
-  },
-
-  {
-    name: "Express",
-    icon: <SiExpress size={50} />,
-    color: "text-white",
-    category: "Backend",
-    percent: 85,
-  },
-
-  {
-    name: "MongoDB",
-    icon: <SiMongodb size={50} />,
-    color: "text-green-400",
-    category: "Database",
-    percent: 85,
-  },
-
-  {
-    name: "Git",
-    icon: <FaGitAlt size={50} />,
-    color: "text-orange-500",
-    category: "Tools",
-    percent: 90,
-  },
-
-  {
-    name: "GitHub",
-    icon: <FaGithub size={50} />,
-    color: "text-white",
-    category: "Tools",
-    percent: 90,
-  },
-
-  {
-    name: "Python",
-    icon: <SiPython size={50} />,
-    color: "text-yellow-400",
-    category: "Programming",
-    percent: 80,
-  },
-
-  {
-    name: "Java",
-    icon: <FaJava size={50} />,
-    color: "text-red-500",
-    category: "Programming",
-    percent: 80,
-  },
-
-  {
-    name: "C++",
-    icon: <SiCplusplus size={50} />,
-    color: "text-blue-500",
-    category: "Programming",
-    percent: 80,
+    title: "Tools",
+    skills: [
+      {
+        name: "Git",
+        icon: <FaGitAlt className="text-orange-500" />,
+        level: 90,
+      },
+      {
+        name: "GitHub",
+        icon: <FaGithub />,
+        level: 92,
+      },
+      {
+        name: "VS Code",
+        icon: <VscVscode className="text-blue-400" />,
+        level: 95,
+      },
+      {
+        name: "Postman",
+        icon: <SiPostman className="text-orange-400" />,
+        level: 88,
+      },
+      {
+        name: "Figma",
+        icon: <FaFigma className="text-pink-500" />,
+        level: 75,
+      },
+    ],
   },
 ];
 
@@ -129,107 +120,116 @@ function Skills() {
   return (
     <section
       id="skills"
-      className="bg-slate-950 py-24 px-6"
+      className="relative py-28 px-6 bg-[var(--bg-primary)] overflow-hidden"
     >
-      <div className="max-w-7xl mx-auto">
+      {/* Background Glow */}
+
+      <div className="absolute -left-40 top-20 w-[400px] h-[400px] rounded-full bg-cyan-500/10 blur-[140px]"></div>
+
+      <div className="absolute right-0 bottom-0 w-[450px] h-[450px] rounded-full bg-purple-500/10 blur-[150px]"></div>
+
+      <div className="max-w-7xl mx-auto relative z-10">
 
         {/* Heading */}
 
         <motion.div
-          initial={{ opacity: 0, y: 50 }}
+          initial={{ opacity: 0, y: 60 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: .6 }}
+          transition={{ duration: 0.7 }}
           viewport={{ once: true }}
           className="text-center mb-20"
         >
-          <p className="uppercase tracking-[6px] text-cyan-400 font-semibold">
-            Skills
+
+          <p className="uppercase tracking-[8px] text-cyan-400 font-semibold">
+            My Skills
           </p>
 
-          <h2 className="text-5xl font-bold mt-4">
+          <h2 className="text-5xl md:text-6xl font-extrabold tracking-tight text-[var(--text-primary)] mt-4">
             Technologies I Work With
           </h2>
 
-          <div className="w-28 h-1 bg-cyan-400 rounded-full mx-auto mt-5"></div>
+          <div className="w-28 h-1 bg-cyan-400 rounded-full mx-auto mt-6"></div>
+
+          <p className="max-w-2xl mx-auto mt-8 text-lg leading-8 text-[var(--text-secondary)]">
+            I enjoy building modern full-stack applications using
+            the MERN stack, while continuously learning new
+            technologies and improving my problem-solving skills.
+          </p>
 
         </motion.div>
 
-        {/* Grid */}
+        {/* Categories */}
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="grid lg:grid-cols-2 gap-10">
 
-          {skills.map((skill, index) => (
+          {skillCategories.map((category, categoryIndex) => (
 
             <motion.div
-              key={skill.name}
-              initial={{
-                opacity: 0,
-                y: 50,
-              }}
-              whileInView={{
-                opacity: 1,
-                y: 0,
-              }}
+              key={category.title}
+              initial={{ opacity: 0, y: 60 }}
+              whileInView={{ opacity: 1, y: 0 }}
               transition={{
-                delay: index * .07,
+                duration: 0.7,
+                delay: categoryIndex * 0.15,
               }}
               viewport={{ once: true }}
-              whileHover={{
-                y: -10,
-                scale: 1.03,
-              }}
-              className="group relative bg-slate-900 rounded-3xl border border-slate-800 p-8 text-center overflow-hidden transition hover:border-cyan-400"
+              className="rounded-3xl bg-white/10 backdrop-blur-xl border border-white/10 p-8 shadow-xl hover:border-cyan-400 transition-all duration-500"
             >
 
-              {/* Glow */}
-
-              <div className="absolute inset-0 opacity-0 group-hover:opacity-100 transition duration-500 bg-cyan-500/10 blur-3xl"></div>
-
-              <div className={`relative ${skill.color} flex justify-center mb-6`}>
-
-                {skill.icon}
-
-              </div>
-
-              <h3 className="text-2xl font-semibold">
-
-                {skill.name}
-
+              <h3 className="text-3xl font-bold text-cyan-400 mb-8">
+                {category.title}
               </h3>
 
-              <p className="text-gray-400 mt-2">
+              <div className="space-y-6">
 
-                {skill.category}
+                {category.skills.map((skill) => (
 
-              </p>
+                  <div key={skill.name}>
 
-              {/* Progress */}
+                    <div className="flex justify-between items-center mb-3">
 
-              <div className="mt-8">
+                      <div className="flex items-center gap-3 text-lg font-semibold text-[var(--text-primary)]">
 
-                <div className="flex justify-between mb-2">
+                        <span className="text-2xl">
+                          {skill.icon}
+                        </span>
 
-                  <span>Skill</span>
+                        <span>
+                          {skill.name}
+                        </span>
 
-                  <span>{skill.percent}%</span>
+                      </div>
 
-                </div>
+                      <span className="text-cyan-400 font-semibold">
+                        {skill.level}%
+                      </span>
 
-                <div className="w-full h-3 bg-slate-700 rounded-full overflow-hidden">
+                    </div>
 
-                  <motion.div
-                    initial={{ width: 0 }}
-                    whileInView={{
-                      width: `${skill.percent}%`,
-                    }}
-                    transition={{
-                      duration: 1,
-                    }}
-                    viewport={{ once: true }}
-                    className="h-full bg-cyan-400 rounded-full"
-                  />
+                    {/* Continue in Part 2 */}
+                                        {/* Progress Bar */}
 
-                </div>
+                    <div className="w-full h-3 rounded-full bg-slate-700 overflow-hidden">
+
+                      <motion.div
+                        initial={{ width: 0 }}
+                        whileInView={{
+                          width: `${skill.level}%`,
+                        }}
+                        transition={{
+                          duration: 1.2,
+                          delay: 0.2,
+                          ease: "easeOut",
+                        }}
+                        viewport={{ once: true }}
+                        className="h-full rounded-full bg-gradient-to-r from-cyan-400 via-blue-500 to-purple-500 shadow-[0_0_20px_rgba(34,211,238,0.5)]"
+                      />
+
+                    </div>
+
+                  </div>
+
+                ))}
 
               </div>
 
@@ -239,7 +239,74 @@ function Skills() {
 
         </div>
 
+        {/* Bottom Section */}
+
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            duration: 0.8,
+            delay: 0.3,
+          }}
+          viewport={{ once: true }}
+          className="mt-24"
+        >
+
+          <div className="rounded-3xl bg-white/10 backdrop-blur-xl border border-white/10 p-10 text-center hover:border-cyan-400 transition-all duration-500">
+
+            <h3 className="text-3xl font-bold text-[var(--text-primary)] mb-6">
+              Always Learning 🚀
+            </h3>
+
+            <p className="max-w-3xl mx-auto leading-8 text-[var(--text-secondary)]">
+
+              I enjoy learning new technologies and continuously improving my
+              development skills. Along with Full Stack Development, I actively
+              practice Data Structures & Algorithms and explore Artificial
+              Intelligence, Machine Learning, and modern software engineering
+              concepts.
+
+            </p>
+
+            <div className="flex flex-wrap justify-center gap-4 mt-10">
+
+              {[
+                "React",
+                "Node.js",
+                "Express",
+                "MongoDB",
+                "Tailwind CSS",
+                "JavaScript",
+                "Git",
+                "REST APIs",
+                "Python",
+                "AI/ML",
+              ].map((item) => (
+
+                <motion.span
+                  key={item}
+                  whileHover={{
+                    scale: 1.08,
+                    y: -3,
+                  }}
+                  className="px-5 py-2 rounded-full bg-cyan-500/10 border border-cyan-400/20 text-cyan-400 font-medium cursor-default transition-all duration-300"
+                >
+                  {item}
+                </motion.span>
+
+              ))}
+
+            </div>
+
+          </div>
+
+        </motion.div>
+
       </div>
+
     </section>
   );
 }
