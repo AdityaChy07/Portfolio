@@ -11,7 +11,7 @@ import {
   FaCode,
 } from "react-icons/fa";
 
-import profile from "../../assets/profile.jpeg";
+import profile from "../../assets/profile3.jpeg";
 
 import AuroraBackground from "../ui/AuroraBackground";
 import FloatingBackground from "../ui/FloatingBackground";
