@@ -1,0 +1,35 @@
+@import "tailwindcss";
+
+/* Smooth Scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Global Body Style */
+body {
+  margin: 0;
+  padding: 0;
+  background-color: #030712;
+  color: white;
+  font-family: Inter, sans-serif;
+}
+
+/* Hide Horizontal Scroll */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #7c3aed;
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #111827;
+}
