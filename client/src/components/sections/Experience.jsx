@@ -19,7 +19,7 @@ const timeline = [
     subtitle:
       "Jaypee University of Information Technology (JUIT)",
     description:
-      "B.Tech in Computer Science Engineering with Specialization in Full Stack Software Development (FSSD). Started my engineering journey with a strong focus on programming fundamentals, problem solving, and software development.",
+      "Started my B.Tech journey in Computer Science Engineering with a specialization in Full Stack Software Development (FSSD), focusing on programming fundamentals, problem solving and software development.",
   },
 
   {
@@ -28,7 +28,7 @@ const timeline = [
     title: "Started MERN Stack Development",
     subtitle: "Beginning of 4th Semester",
     description:
-      "Started learning React.js, Node.js, Express.js and MongoDB. Built multiple full-stack applications while strengthening frontend and backend development skills.",
+      "Started working with React.js, Node.js, Express.js and MongoDB, building full-stack applications while strengthening frontend, backend and API development skills.",
   },
 
   {
@@ -37,7 +37,7 @@ const timeline = [
     title: "AI Health Risk Assessment System",
     subtitle: "Machine Learning Project",
     description:
-      "Developed an AI-powered Health Risk Assessment System for Breast Cancer and Lung Cancer prediction using Machine Learning models and Python.",
+      "Developed a Health Risk Assessment System for Breast Cancer and Lung Cancer prediction using Python and Machine Learning techniques.",
   },
 
   {
@@ -46,7 +46,7 @@ const timeline = [
     title: "Campus Infrastructure Complaint Tracker",
     subtitle: "Major MERN Project",
     description:
-      "Built a complete role-based Campus Infrastructure Complaint Tracker with authentication, dashboards, complaint tracking, notifications and MongoDB integration.",
+      "Built a role-based campus complaint management platform with authentication, dashboards, complaint tracking, notifications and MongoDB integration.",
   },
 
   {
@@ -62,27 +62,27 @@ const timeline = [
     year: "2026",
     icon: <FaTrophy />,
     title: "Cricket Tournament League Management",
-    subtitle: "Sports Management Website",
+    subtitle: "Web Application",
     description:
-      "Designed and developed a responsive cricket tournament management website featuring fixtures, teams, points table and tournament information.",
+      "Designed and developed a responsive cricket tournament website featuring teams, fixtures, points table and tournament information.",
   },
 
   {
     year: "2026",
     icon: <FaGlobe />,
     title: "Modern Portfolio Website",
-    subtitle: "Personal Branding",
+    subtitle: "Personal Project",
     description:
-      "Designed and developed a premium portfolio using React, Tailwind CSS, Framer Motion and Express.js with modern animations and responsive design.",
+      "Designed and developed a responsive personal portfolio using React, Tailwind CSS, Framer Motion and a Node.js/Express backend.",
   },
 
   {
     year: "Future",
     icon: <FaBullseye />,
-    title: "Career Vision",
-    subtitle: "Dream Goal",
+    title: "Software Engineering Career",
+    subtitle: "Long-Term Goal",
     description:
-      "Aspire to become a Software Development Engineer in a product-based company while growing as a Full Stack Developer, AI Engineer and Data Analytics professional, building impactful products used by millions of people.",
+      "My goal is to become a Software Development Engineer at a technology or product-based company and contribute to scalable, useful and impactful software products.",
   },
 ];
 
@@ -90,214 +90,228 @@ function Experience() {
   return (
     <section
       id="experience"
-      className="relative py-28 px-6 bg-[var(--bg-primary)] overflow-hidden"
+      className="bg-[var(--bg-secondary)] px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28"
     >
-      {/* Background Glow */}
+      <div className="mx-auto max-w-6xl">
 
-      <div className="absolute -left-32 top-24 w-[420px] h-[420px] rounded-full bg-cyan-500/10 blur-[140px]"></div>
-
-      <div className="absolute right-0 bottom-0 w-[420px] h-[420px] rounded-full bg-purple-500/10 blur-[150px]"></div>
-
-      <div className="max-w-6xl mx-auto relative z-10">
-
-        {/* Heading */}
-
-        <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="text-center mb-24"
-        >
-          <p className="uppercase tracking-[8px] text-cyan-400 font-semibold">
-            My Journey
-          </p>
-
-          <h2 className="text-5xl md:text-6xl font-extrabold tracking-tight text-[var(--text-primary)] mt-4">
-            Learning & Growth Timeline
-          </h2>
-
-          <div className="w-28 h-1 bg-cyan-400 rounded-full mx-auto mt-6"></div>
-
-          <p className="max-w-3xl mx-auto mt-8 text-lg leading-8 text-[var(--text-secondary)]">
-            Every project and every milestone has helped me grow as a developer.
-            This journey reflects my continuous learning, practical experience,
-            and long-term vision in software engineering.
-          </p>
-        </motion.div>
-
-        {/* Timeline */}
-
-        <div className="relative">
-
-          {/* Vertical Line */}
-
-          <div className="absolute left-6 md:left-1/2 md:-translate-x-1/2 top-0 bottom-0 w-1 bg-gradient-to-b from-cyan-400 via-blue-500 to-purple-500 rounded-full"></div>
-
-          {/* Timeline Items */}
-
-          <div className="space-y-16">
-
-            {timeline.map((item, index) => (
-
-              <motion.div
-                key={index}
-                initial={{ opacity: 0, y: 70 }}
-                whileInView={{ opacity: 1, y: 0 }}
-                transition={{
-                  duration: 0.7,
-                  delay: index * 0.12,
-                }}
-                viewport={{ once: true }}
-                className={`relative flex items-center ${
-                  index % 2 === 0
-                    ? "md:flex-row"
-                    : "md:flex-row-reverse"
-                }`}
-              >
-                                {/* Timeline Circle */}
-
-                <div className="absolute left-6 md:left-1/2 md:-translate-x-1/2 z-20">
-
-                  <motion.div
-                    whileHover={{
-                      scale: 1.15,
-                      rotate: 10,
-                    }}
-                    className="w-14 h-14 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 flex items-center justify-center text-black text-xl shadow-[0_0_25px_rgba(34,211,238,0.45)]"
-                  >
-                    {item.icon}
-                  </motion.div>
-
-                </div>
-
-                {/* Timeline Card */}
-
-                <motion.div
-                  whileHover={{
-                    y: -8,
-                    scale: 1.02,
-                  }}
-                  transition={{
-                    duration: 0.3,
-                  }}
-                  className={`ml-20 md:ml-0 w-full md:w-[45%]
-                  rounded-3xl
-                  bg-white/10
-                  backdrop-blur-xl
-                  border
-                  border-white/10
-                  p-8
-                  shadow-xl
-                  hover:border-cyan-400
-                  hover:shadow-[0_0_40px_rgba(34,211,238,0.35)]
-                  transition-all
-                  duration-500`}
-                >
-
-                  {/* Year */}
-
-                  <span className="inline-block px-4 py-2 rounded-full bg-cyan-500/15 text-cyan-400 text-sm font-semibold mb-5">
-
-                    {item.year}
-
-                  </span>
-
-                  {/* Title */}
-
-                  <h3 className="text-2xl font-bold text-[var(--text-primary)]">
-
-                    {item.title}
-
-                  </h3>
-
-                  {/* Subtitle */}
-
-                  <p className="text-cyan-400 font-medium mt-2">
-
-                    {item.subtitle}
-
-                  </p>
-
-                  {/* Description */}
-
-                  <p className="mt-5 leading-8 text-[var(--text-secondary)]">
-
-                    {item.description}
-
-                  </p>
-
-                </motion.div>
-
-              </motion.div>
-
-            ))}
-
-          </div>
-
-        </div>
-
-        {/* Career Vision */}
+        {/* =====================================================
+            SECTION HEADER
+        ====================================================== */}
 
         <motion.div
           initial={{
             opacity: 0,
-            y: 60,
+            y: 20,
           }}
           whileInView={{
             opacity: 1,
             y: 0,
           }}
           transition={{
-            duration: 0.8,
+            duration: 0.5,
+            ease: "easeOut",
           }}
           viewport={{
             once: true,
           }}
-          className="mt-28"
+          className="mb-14 max-w-3xl sm:mb-16"
+        >
+          <p className="section-label">
+            My Journey
+          </p>
+
+          <h2 className="section-title">
+            Learning & Development
+          </h2>
+
+          <div className="accent-line"></div>
+
+          <p className="section-description">
+            My journey from starting Computer Science Engineering to building
+            full-stack applications and developing practical software
+            engineering skills.
+          </p>
+        </motion.div>
+
+        {/* =====================================================
+            TIMELINE
+        ====================================================== */}
+
+        <div className="relative">
+
+          {/* Desktop Center Line */}
+
+          <div className="absolute bottom-0 left-5 top-0 w-px bg-[var(--border)] md:left-1/2 md:-translate-x-1/2"></div>
+
+          <div className="space-y-10 md:space-y-14">
+
+            {timeline.map((item, index) => (
+
+              <motion.div
+                key={`${item.year}-${item.title}`}
+                initial={{
+                  opacity: 0,
+                  y: 20,
+                }}
+                whileInView={{
+                  opacity: 1,
+                  y: 0,
+                }}
+                transition={{
+                  duration: 0.45,
+                  delay: index * 0.06,
+                  ease: "easeOut",
+                }}
+                viewport={{
+                  once: true,
+                  margin: "-50px",
+                }}
+                className={`relative flex md:items-center ${
+                  index % 2 === 0
+                    ? "md:flex-row"
+                    : "md:flex-row-reverse"
+                }`}
+              >
+
+                {/* =================================================
+                    TIMELINE DOT
+                ================================================== */}
+
+                <div className="absolute left-5 top-7 z-10 flex h-3 w-3 -translate-x-1/2 items-center justify-center rounded-full border-2 border-[var(--bg-secondary)] bg-[var(--accent)] md:left-1/2">
+                </div>
+
+                {/* =================================================
+                    CONTENT
+                ================================================== */}
+
+                <div
+                  className={`ml-10 w-full md:ml-0 md:w-[44%] ${
+                    index % 2 === 0
+                      ? "md:mr-auto"
+                      : "md:ml-auto"
+                  }`}
+                >
+
+                  <article className="rounded-2xl border border-[var(--border)] bg-[var(--bg-surface)] p-5 shadow-[var(--shadow-sm)] transition-all duration-300 hover:-translate-y-1 hover:border-[var(--border-hover)] hover:shadow-[var(--shadow-md)] sm:p-6">
+
+                    {/* Year + Icon */}
+
+                    <div className="flex items-center justify-between gap-4">
+
+                      <span className="rounded-md bg-[var(--accent-soft)] px-3 py-1.5 text-xs font-semibold text-[var(--accent)]">
+                        {item.year}
+                      </span>
+
+                      <div className="flex h-9 w-9 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] text-sm text-[var(--accent)]">
+                        {item.icon}
+                      </div>
+
+                    </div>
+
+                    {/* Title */}
+
+                    <h3 className="mt-5 text-xl font-bold tracking-tight text-[var(--text-primary)] sm:text-2xl">
+                      {item.title}
+                    </h3>
+
+                    {/* Subtitle */}
+
+                    <p className="mt-2 text-sm font-medium text-[var(--accent)]">
+                      {item.subtitle}
+                    </p>
+
+                    {/* Description */}
+
+                    <p className="mt-4 text-sm leading-7 text-[var(--text-secondary)] sm:text-base">
+                      {item.description}
+                    </p>
+
+                  </article>
+
+                </div>
+
+              </motion.div>
+
+            ))}
+
+          </div>
+        </div>
+
+        {/* =====================================================
+            CAREER VISION
+        ====================================================== */}
+
+        <motion.div
+          initial={{
+            opacity: 0,
+            y: 20,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            duration: 0.5,
+          }}
+          viewport={{
+            once: true,
+          }}
+          className="mt-16 sm:mt-20"
         >
 
-          <div className="rounded-3xl bg-gradient-to-r from-cyan-500/10 to-purple-500/10 backdrop-blur-xl border border-cyan-400/20 p-10 text-center hover:shadow-[0_0_45px_rgba(34,211,238,0.3)] transition-all duration-500">
+          <div className="rounded-2xl border border-[var(--border)] bg-[var(--bg-surface)] p-6 shadow-[var(--shadow-sm)] sm:p-8 md:p-10">
 
-            <h3 className="text-4xl font-extrabold text-[var(--text-primary)]">
+            <div className="flex flex-col gap-6 md:flex-row md:items-start">
 
-              🎯 Career Vision
+              {/* Icon */}
 
-            </h3>
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-[var(--accent-soft)] text-[var(--accent)]">
+                <FaBullseye />
+              </div>
 
-            <p className="mt-6 text-lg leading-8 text-[var(--text-secondary)] max-w-4xl mx-auto">
+              {/* Content */}
 
-              I aspire to build scalable, innovative and impactful software
-              products that solve real-world problems. My goal is to become a
-              Software Development Engineer in a leading product-based company
-              while continuously growing as a Full Stack Developer, AI Engineer
-              and Data Analytics professional.
+              <div>
 
-            </p>
+                <p className="text-xs font-semibold uppercase tracking-[0.14em] text-[var(--accent)]">
+                  Career Vision
+                </p>
 
-            <div className="flex flex-wrap justify-center gap-4 mt-10">
+                <h3 className="mt-2 text-2xl font-bold tracking-tight text-[var(--text-primary)] sm:text-3xl">
+                  Building Towards Software Engineering
+                </h3>
 
-              {[
-                "Software Development Engineer",
-                "Full Stack Developer",
-                "AI Engineer",
-                "Data Analytics",
-                "Problem Solver",
-                "Continuous Learner",
-              ].map((goal) => (
+                <p className="mt-4 max-w-3xl text-sm leading-7 text-[var(--text-secondary)] sm:text-base">
+                  I aspire to become a Software Development Engineer at a
+                  technology or product-based company, where I can work on
+                  challenging problems, build scalable applications and
+                  continuously improve my software engineering skills.
+                </p>
 
-                <motion.span
-                  key={goal}
-                  whileHover={{
-                    scale: 1.08,
-                    y: -4,
-                  }}
-                  className="px-5 py-3 rounded-full bg-cyan-500/10 border border-cyan-400/20 text-cyan-400 font-semibold cursor-default"
-                >
-                  {goal}
-                </motion.span>
+                {/* Goals */}
 
-              ))}
+                <div className="mt-6 flex flex-wrap gap-2">
+
+                  {[
+                    "Software Development Engineer",
+                    "Full Stack Development",
+                    "Product Engineering",
+                    "Problem Solving",
+                    "Continuous Learning",
+                  ].map((goal) => (
+
+                    <span
+                      key={goal}
+                      className="tech-tag"
+                    >
+                      {goal}
+                    </span>
+
+                  ))}
+
+                </div>
+
+              </div>
 
             </div>
 
@@ -306,7 +320,6 @@ function Experience() {
         </motion.div>
 
       </div>
-
     </section>
   );
 }

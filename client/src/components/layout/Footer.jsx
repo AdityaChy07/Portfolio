@@ -1,189 +1,180 @@
-import { motion } from "framer-motion";
 import { Link as ScrollLink } from "react-scroll";
-
 import {
   FaGithub,
   FaLinkedin,
   FaInstagram,
+  FaEnvelope,
   FaArrowUp,
-  FaHeart,
-  FaDownload,
 } from "react-icons/fa";
 
-const links = [
+const navLinks = [
   { name: "Home", to: "hero" },
   { name: "About", to: "about" },
   { name: "Skills", to: "skills" },
   { name: "Projects", to: "projects" },
-  { name: "Journey", to: "experience" },
+  { name: "Experience", to: "experience" },
   { name: "Contact", to: "contact" },
 ];
 
 function Footer() {
+  const currentYear = new Date().getFullYear();
+
   return (
-    <footer className="bg-[var(--bg-primary)] border-t border-white/10 mt-24">
+    <footer className="border-t border-[var(--border)] bg-[var(--bg-secondary)]">
+      <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
 
-      <div className="max-w-7xl mx-auto px-6 py-16">
+        {/* =====================================================
+            TOP
+        ====================================================== */}
 
-        <div className="grid md:grid-cols-3 gap-12">
+        <div className="flex flex-col gap-10 lg:flex-row lg:items-start lg:justify-between">
 
-          {/* Left */}
+          {/* Brand */}
 
-          <div>
+          <div className="max-w-sm">
 
-            <h2 className="text-4xl font-extrabold text-[var(--text-primary)]">
+            <ScrollLink
+              to="hero"
+              smooth
+              duration={500}
+              offset={-80}
+              className="cursor-pointer text-2xl font-bold tracking-tight text-[var(--text-primary)]"
+            >
+              Aditya<span className="text-[var(--accent)]">.</span>
+            </ScrollLink>
 
-              Aditya
-
-              <span className="text-cyan-400">.</span>
-
-            </h2>
-
-            <p className="mt-6 leading-8 text-[var(--text-secondary)]">
-
-              Passionate Full Stack Developer focused on building
-              scalable web applications, solving real-world
-              problems and continuously learning AI,
-              Data Analytics and modern technologies.
-
+            <p className="mt-4 text-sm leading-7 text-[var(--text-secondary)]">
+              Computer Science Engineering student and Full Stack Developer
+              focused on building practical, responsive and scalable software
+              applications.
             </p>
 
-            <a
-              href="/resume.pdf"
-              download
-              className="inline-flex items-center gap-3 mt-8 bg-cyan-400 hover:bg-cyan-500 text-black px-6 py-3 rounded-full font-semibold transition"
-            >
-
-              <FaDownload />
-
-              Download Resume
-
-            </a>
-
           </div>
 
-          {/* Middle */}
+          {/* Quick Links */}
 
           <div>
 
-            <h3 className="text-2xl font-bold mb-6 text-[var(--text-primary)]">
-
+            <h3 className="text-sm font-semibold uppercase tracking-[0.12em] text-[var(--text-primary)]">
               Quick Links
-
             </h3>
 
-            <ul className="space-y-4">
+            <div className="mt-4 grid grid-cols-2 gap-x-8 gap-y-3 sm:grid-cols-3 lg:grid-cols-2">
 
-              {links.map((item) => (
-
-                <li key={item.to}>
-
-                  <ScrollLink
-                    to={item.to}
-                    smooth={true}
-                    duration={600}
-                    offset={-70}
-                    className="cursor-pointer text-[var(--text-secondary)] hover:text-cyan-400 transition"
-                  >
-                    {item.name}
-                  </ScrollLink>
-
-                </li>
-
+              {navLinks.map((item) => (
+                <ScrollLink
+                  key={item.to}
+                  to={item.to}
+                  smooth
+                  duration={500}
+                  offset={-80}
+                  className="cursor-pointer text-sm text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--accent)]"
+                >
+                  {item.name}
+                </ScrollLink>
               ))}
-
-            </ul>
-
-          </div>
-                    {/* Right */}
-
-          <div>
-
-            <h3 className="text-2xl font-bold mb-6 text-[var(--text-primary)]">
-
-              Connect
-
-            </h3>
-
-            <div className="flex gap-5">
-
-              <motion.a
-                whileHover={{ scale: 1.1 }}
-                href="https://github.com/AdityaChy07"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-slate-800 flex justify-center items-center hover:bg-cyan-400 hover:text-black transition"
-              >
-                <FaGithub />
-              </motion.a>
-
-              <motion.a
-                whileHover={{ scale: 1.1 }}
-                href="https://www.linkedin.com/in/adityachy/"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-slate-800 flex justify-center items-center hover:bg-cyan-400 hover:text-black transition"
-              >
-                <FaLinkedin />
-              </motion.a>
-
-              <motion.a
-                whileHover={{ scale: 1.1 }}
-                href="https://www.instagram.com/aditya_chy19"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="w-12 h-12 rounded-full bg-slate-800 flex justify-center items-center hover:bg-cyan-400 hover:text-black transition"
-              >
-                <FaInstagram />
-              </motion.a>
 
             </div>
 
-            <p className="mt-8 text-[var(--text-secondary)]">
+          </div>
 
-              Email
+          {/* Social */}
 
-              <br />
+          <div>
 
-              <span className="text-cyan-400">
+            <h3 className="text-sm font-semibold uppercase tracking-[0.12em] text-[var(--text-primary)]">
+              Connect
+            </h3>
 
-                adityachy417@gmail.com
+            <div className="mt-4 flex gap-2">
 
-              </span>
+              <a
+                href="https://github.com/AdityaChy07"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="GitHub"
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border)] text-[var(--text-secondary)] transition-colors duration-200 hover:border-[var(--accent)] hover:text-[var(--accent)]"
+              >
+                <FaGithub />
+              </a>
 
-            </p>
+              <a
+                href="https://www.linkedin.com/in/adityachy/"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="LinkedIn"
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border)] text-[var(--text-secondary)] transition-colors duration-200 hover:border-[var(--accent)] hover:text-[var(--accent)]"
+              >
+                <FaLinkedin />
+              </a>
+
+              <a
+                href="https://www.instagram.com/aditya_chy19"
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label="Instagram"
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border)] text-[var(--text-secondary)] transition-colors duration-200 hover:border-[var(--accent)] hover:text-[var(--accent)]"
+              >
+                <FaInstagram />
+              </a>
+
+              <a
+                href="mailto:adityachy417@gmail.com"
+                aria-label="Email"
+                className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border)] text-[var(--text-secondary)] transition-colors duration-200 hover:border-[var(--accent)] hover:text-[var(--accent)]"
+              >
+                <FaEnvelope />
+              </a>
+
+            </div>
 
           </div>
 
         </div>
 
-        <div className="border-t border-white/10 mt-14 pt-8 flex flex-col md:flex-row justify-between items-center gap-6">
+        {/* =====================================================
+            DIVIDER
+        ====================================================== */}
 
-          <p className="text-[var(--text-secondary)] flex items-center gap-2">
+        <div className="my-10 h-px bg-[var(--border)]"></div>
 
-            © {new Date().getFullYear()} Aditya Choudhary
+        {/* =====================================================
+            BOTTOM
+        ====================================================== */}
 
-            <FaHeart className="text-red-500" />
+        <div className="flex flex-col gap-4 text-sm text-[var(--text-muted)] sm:flex-row sm:items-center sm:justify-between">
 
-            Built using React, Tailwind CSS & Express.js
-
+          <p>
+            © {currentYear} Aditya Choudhary. All rights reserved.
           </p>
+
+          <div className="flex items-center gap-1">
+            <span>Built with</span>
+            <span className="font-medium text-[var(--text-secondary)]">
+              React
+            </span>
+            <span>•</span>
+            <span className="font-medium text-[var(--text-secondary)]">
+              Tailwind CSS
+            </span>
+          </div>
+
+          {/* Back to top */}
 
           <ScrollLink
             to="hero"
-            smooth={true}
-            duration={600}
-            className="cursor-pointer w-12 h-12 rounded-full bg-cyan-400 flex justify-center items-center text-black hover:scale-110 transition"
+            smooth
+            duration={500}
+            offset={-80}
+            aria-label="Back to top"
+            className="flex h-9 w-9 cursor-pointer items-center justify-center rounded-lg border border-[var(--border)] text-[var(--text-secondary)] transition-colors duration-200 hover:border-[var(--accent)] hover:text-[var(--accent)]"
           >
-
-            <FaArrowUp />
-
+            <FaArrowUp className="text-xs" />
           </ScrollLink>
 
         </div>
 
       </div>
-
     </footer>
   );
 }

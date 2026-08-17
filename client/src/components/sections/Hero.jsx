@@ -6,330 +6,262 @@ import {
   FaGithub,
   FaLinkedin,
   FaInstagram,
-  FaArrowDown,
   FaDownload,
-  FaCode,
+  FaArrowRight,
+  FaEnvelope,
 } from "react-icons/fa";
 
 import profile from "../../assets/profile3.jpeg";
-
-import AuroraBackground from "../ui/AuroraBackground";
-import FloatingBackground from "../ui/FloatingBackground";
-import AnimatedGradient from "../ui/AnimatedGradient";
 
 function Hero() {
   return (
     <section
       id="hero"
-      className="relative min-h-screen overflow-hidden flex items-center bg-[var(--bg-primary)] px-6"
+      className="relative flex min-h-screen items-center bg-[var(--bg-primary)] px-4 pb-20 pt-28 sm:px-6 sm:pt-32 lg:px-8 lg:pt-28"
     >
-      {/* Background */}
-
-      <AnimatedGradient />
-      <FloatingBackground />
-      <AuroraBackground />
-
-      {/* Decorative Glow */}
-
-      <div className="absolute -top-40 -left-40 w-[550px] h-[550px] rounded-full bg-cyan-500/10 blur-[140px]"></div>
-
-      <div className="absolute bottom-0 right-0 w-[450px] h-[450px] rounded-full bg-purple-500/10 blur-[130px]"></div>
-
-      <div className="relative z-10 max-w-7xl mx-auto grid lg:grid-cols-2 gap-20 items-center">
-
-        {/* ================= LEFT SIDE ================= */}
+      <div className="mx-auto grid w-full max-w-7xl grid-cols-1 items-center gap-14 lg:grid-cols-[1.15fr_0.85fr] lg:gap-20">
+        {/* =====================================================
+            LEFT CONTENT
+        ====================================================== */}
 
         <motion.div
-          initial={{ opacity: 0, x: -80 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{
+            duration: 0.5,
+            ease: "easeOut",
+          }}
         >
+          {/* Small Label */}
 
-          {/* Availability Badge */}
+          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--bg-surface)] px-3 py-1.5 text-sm text-[var(--text-secondary)]">
+            <span className="h-2 w-2 rounded-full bg-[var(--success)]"></span>
 
-          <motion.div
-            animate={{
-              y: [0, -6, 0],
-            }}
-            transition={{
-              repeat: Infinity,
-              duration: 3,
-            }}
-            className="inline-flex items-center gap-3 px-5 py-2 rounded-full border border-cyan-400/30 bg-cyan-400/10 backdrop-blur-xl mb-8"
-          >
-            <span className="w-3 h-3 rounded-full bg-green-400 animate-pulse"></span>
+            Open to opportunities
+          </div>
 
-            <span className="text-sm text-[var(--text-primary)]">
-              Available for Internship & Freelance
-            </span>
-          </motion.div>
+          {/* Main Heading */}
 
-          {/* Greeting */}
-
-          <p className="uppercase tracking-[7px] text-cyan-400 font-semibold">
-            Welcome To My Portfolio
-          </p>
-
-          {/* Heading */}
-
-          <h1 className="mt-6 text-5xl md:text-7xl font-extrabold leading-tight text-[var(--text-primary)]">
-
+          <h1 className="max-w-4xl text-4xl font-extrabold leading-[1.08] tracking-tight text-[var(--text-primary)] sm:text-5xl md:text-6xl lg:text-7xl">
             Hi, I'm{" "}
-
-            <span className="bg-gradient-to-r from-cyan-400 via-blue-400 to-purple-500 bg-clip-text text-transparent">
-              Aditya
+            <span className="text-[var(--accent)]">
+              Aditya Choudhary
             </span>
-
           </h1>
 
-          {/* Typing */}
+          {/* Role */}
 
-          <div className="mt-8 text-2xl md:text-4xl font-semibold text-cyan-400 h-16">
-
+          <div className="mt-6 min-h-[3rem] text-xl font-semibold text-[var(--text-secondary)] sm:text-2xl md:text-3xl">
             <TypeAnimation
               sequence={[
-                "Full Stack MERN Developer",
-                2000,
-                "Frontend Developer",
-                2000,
-                "Backend Developer",
-                2000,
-                "React.js Developer",
-                2000,
-                "AI Enthusiast",
-                2000,
+                "Full Stack Developer",
+                2200,
+                "MERN Stack Developer",
+                2200,
+                "AI Engineer",
+                2200,
+                "Data Analytics Enthusiast",
+                2200,
               ]}
               speed={45}
               repeat={Infinity}
             />
-
           </div>
 
           {/* Description */}
 
-          <p className="mt-8 max-w-xl leading-8 text-lg text-[var(--text-secondary)]">
-            Passionate Full Stack Developer focused on building modern,
-            scalable and high-performance web applications using React,
-            Node.js, Express.js and MongoDB.
-            I enjoy solving real-world problems with clean code,
-            intuitive UI and exceptional user experience.
+          <p className="mt-7 max-w-2xl text-base leading-8 text-[var(--text-secondary)] sm:text-lg">
+            I build clean, scalable and user-focused web applications using
+            modern technologies. Currently pursuing B.Tech in Computer Science
+            Engineering with specialization in Full Stack Software Development
+            at Jaypee University of Information Technology.
           </p>
 
-          {/* Buttons */}
+          <p className="mt-4 max-w-2xl text-base leading-8 text-[var(--text-secondary)] sm:text-lg">
+            I enjoy solving real-world problems through software and exploring
+            Artificial Intelligence, Machine Learning and Data Analytics.
+          </p>
 
-          <div className="flex flex-wrap gap-5 mt-10">
+          {/* CTA Buttons */}
+
+          <div className="mt-9 flex flex-col gap-3 sm:flex-row">
+            <ScrollLink
+              to="projects"
+              smooth
+              duration={500}
+              offset={-80}
+              className="group inline-flex cursor-pointer items-center justify-center gap-2 rounded-lg bg-[var(--accent)] px-6 py-3.5 font-semibold text-white transition-all duration-200 hover:bg-[var(--accent-hover)] hover:-translate-y-0.5"
+            >
+              View Projects
+
+              <FaArrowRight className="text-sm transition-transform duration-200 group-hover:translate-x-1" />
+            </ScrollLink>
 
             <a
               href="/resume.pdf"
               download
-              className="flex items-center gap-3 px-8 py-4 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 text-black font-semibold hover:scale-105 hover:shadow-[0_0_35px_rgba(34,211,238,0.35)] transition-all duration-300"
+              className="inline-flex items-center justify-center gap-2 rounded-lg border border-[var(--border-hover)] bg-transparent px-6 py-3.5 font-semibold text-[var(--text-primary)] transition-all duration-200 hover:border-[var(--accent)] hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]"
             >
-              <FaDownload />
+              <FaDownload className="text-sm" />
 
               Download Resume
-
             </a>
-
-            <ScrollLink
-              to="contact"
-              smooth={true}
-              duration={600}
-              offset={-70}
-              className="cursor-pointer flex items-center gap-3 px-8 py-4 rounded-full border border-cyan-400 text-cyan-400 hover:bg-cyan-400 hover:text-black transition-all duration-300"
-            >
-              Contact Me
-            </ScrollLink>
-
           </div>
 
-          {/* Social Icons */}
+          {/* Social Links */}
 
-          <div className="flex items-center gap-6 mt-12">
-
+          <div className="mt-9 flex items-center gap-3">
             <a
               href="https://github.com/AdityaChy07"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-xl border border-white/10 flex items-center justify-center hover:bg-cyan-400 hover:text-black hover:scale-110 transition-all duration-300"
+              aria-label="GitHub"
+              className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--bg-surface)] text-[var(--text-secondary)] transition-all duration-200 hover:border-[var(--accent)] hover:text-[var(--accent)]"
             >
-              <FaGithub size={20} />
+              <FaGithub />
             </a>
 
             <a
               href="https://www.linkedin.com/in/adityachy/"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-xl border border-white/10 flex items-center justify-center hover:bg-cyan-400 hover:text-black hover:scale-110 transition-all duration-300"
+              aria-label="LinkedIn"
+              className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--bg-surface)] text-[var(--text-secondary)] transition-all duration-200 hover:border-[var(--accent)] hover:text-[var(--accent)]"
             >
-              <FaLinkedin size={20} />
+              <FaLinkedin />
             </a>
 
             <a
               href="https://www.instagram.com/aditya_chy19"
               target="_blank"
               rel="noopener noreferrer"
-              className="w-12 h-12 rounded-full bg-white/10 backdrop-blur-xl border border-white/10 flex items-center justify-center hover:bg-cyan-400 hover:text-black hover:scale-110 transition-all duration-300"
+              aria-label="Instagram"
+              className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--bg-surface)] text-[var(--text-secondary)] transition-all duration-200 hover:border-[var(--accent)] hover:text-[var(--accent)]"
             >
-              <FaInstagram size={20} />
+              <FaInstagram />
             </a>
 
+            <a
+              href="mailto:adityachy417@gmail.com"
+              aria-label="Email"
+              className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--bg-surface)] text-[var(--text-secondary)] transition-all duration-200 hover:border-[var(--accent)] hover:text-[var(--accent)]"
+            >
+              <FaEnvelope />
+            </a>
           </div>
 
+          {/* Technology Row */}
+
+          <div className="mt-10 border-t border-[var(--border)] pt-6">
+            <p className="mb-3 text-xs font-semibold uppercase tracking-[0.15em] text-[var(--text-muted)]">
+              Technologies
+            </p>
+
+            <div className="flex flex-wrap gap-2">
+              {[
+                "React.js",
+                "JavaScript",
+                "Node.js",
+                "Express.js",
+                "MongoDB",
+                "Python",
+                "Git",
+                "REST APIs",
+              ].map((tech) => (
+                <span
+                  key={tech}
+                  className="tech-tag"
+                >
+                  {tech}
+                </span>
+              ))}
+            </div>
+          </div>
         </motion.div>
 
-        {/* ================= RIGHT SIDE ================= */}
-                <motion.div
-          initial={{ opacity: 0, x: 80 }}
-          animate={{ opacity: 1, x: 0 }}
-          transition={{ duration: 0.8 }}
-          className="flex justify-center"
+        {/* =====================================================
+            RIGHT CONTENT
+        ====================================================== */}
+
+        <motion.div
+          initial={{ opacity: 0, scale: 0.97 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{
+            duration: 0.5,
+            delay: 0.1,
+            ease: "easeOut",
+          }}
+          className="flex justify-center lg:justify-end"
         >
-          <div className="relative">
+          <div className="w-full max-w-sm sm:max-w-md">
+            {/* Image Container */}
 
-            {/* Background Glow */}
+            <div className="overflow-hidden rounded-2xl border border-[var(--border)] bg-[var(--bg-surface)] p-2 shadow-[var(--shadow-lg)]">
+              <img
+                src={profile}
+                alt="Aditya Choudhary"
+                className="aspect-[4/5] w-full rounded-xl object-cover object-center"
+              />
+            </div>
 
-            <div className="absolute inset-0 rounded-full bg-cyan-500/20 blur-[120px] animate-pulse"></div>
+            {/* Simple Stats */}
 
-            <div className="absolute -inset-10 rounded-full border border-cyan-400/20 animate-pulse"></div>
+            <div className="mt-4 grid grid-cols-3 gap-3">
+              <div className="rounded-xl border border-[var(--border)] bg-[var(--bg-surface)] p-4 text-center">
+                <p className="text-xl font-bold text-[var(--text-primary)] sm:text-2xl">
+                  2024
+                </p>
 
-            {/* Profile Image */}
-
-            <motion.img
-              whileHover={{
-                scale: 1.03,
-                rotate: 1,
-              }}
-              transition={{
-                duration: 0.4,
-              }}
-              src={profile}
-              alt="Aditya Choudhary"
-              className="relative
-              w-72
-              h-72
-              md:w-[430px]
-              md:h-[430px]
-              lg:w-[470px]
-              lg:h-[470px]
-              rounded-full
-              object-cover
-              border-4
-              border-cyan-400
-              shadow-[0_0_60px_rgba(34,211,238,0.45)]"
-            />
-
-            {/* React Badge */}
-
-            <motion.div
-              animate={{
-                y: [0, -10, 0],
-              }}
-              transition={{
-                repeat: Infinity,
-                duration: 3,
-              }}
-              className="absolute top-10 -left-8 bg-white/10 backdrop-blur-xl border border-white/10 rounded-xl px-4 py-2 shadow-xl"
-            >
-              ⚛ React
-            </motion.div>
-
-            {/* Node Badge */}
-
-            <motion.div
-              animate={{
-                y: [0, 12, 0],
-              }}
-              transition={{
-                repeat: Infinity,
-                duration: 4,
-              }}
-              className="absolute bottom-16 -right-10 bg-white/10 backdrop-blur-xl border border-white/10 rounded-xl px-4 py-2 shadow-xl"
-            >
-              🚀 Node.js
-            </motion.div>
-
-            {/* MongoDB Badge */}
-
-            <motion.div
-              animate={{
-                x: [0, 10, 0],
-              }}
-              transition={{
-                repeat: Infinity,
-                duration: 3.5,
-              }}
-              className="absolute top-1/2 -right-14 bg-white/10 backdrop-blur-xl border border-white/10 rounded-xl px-4 py-2 shadow-xl"
-            >
-              🍃 MongoDB
-            </motion.div>
-
-            {/* Experience Card */}
-
-            <motion.div
-              animate={{
-                y: [0, -8, 0],
-              }}
-              transition={{
-                repeat: Infinity,
-                duration: 3,
-              }}
-              className="absolute -bottom-8 left-1/2 -translate-x-1/2 bg-white/10 backdrop-blur-xl border border-white/10 rounded-2xl px-6 py-4 shadow-2xl"
-            >
-              <div className="flex items-center gap-3">
-
-                <div className="w-12 h-12 rounded-full bg-cyan-400 flex items-center justify-center">
-
-                  <FaCode className="text-black text-xl" />
-
-                </div>
-
-                <div>
-
-                  <h3 className="font-bold text-lg text-[var(--text-primary)]">
-                    MERN Developer
-                  </h3>
-
-                  <p className="text-sm text-[var(--text-secondary)]">
-                    Building Modern Web Apps
-                  </p>
-
-                </div>
-
+                <p className="mt-1 text-xs text-[var(--text-secondary)]">
+                  B.Tech Started
+                </p>
               </div>
 
-            </motion.div>
+              <div className="rounded-xl border border-[var(--border)] bg-[var(--bg-surface)] p-4 text-center">
+                <p className="text-xl font-bold text-[var(--text-primary)] sm:text-2xl">
+                  MERN
+                </p>
 
+                <p className="mt-1 text-xs text-[var(--text-secondary)]">
+                  Full Stack
+                </p>
+              </div>
+
+              <div className="rounded-xl border border-[var(--border)] bg-[var(--bg-surface)] p-4 text-center">
+                <p className="text-xl font-bold text-[var(--text-primary)] sm:text-2xl">
+                  AI
+                </p>
+
+                <p className="mt-1 text-xs text-[var(--text-secondary)]">
+                  Exploring
+                </p>
+              </div>
+            </div>
           </div>
-
         </motion.div>
-
       </div>
 
       {/* Scroll Indicator */}
 
       <motion.div
-        animate={{
-          y: [0, 12, 0],
-        }}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
         transition={{
-          repeat: Infinity,
-          duration: 1.8,
+          delay: 1,
+          duration: 0.4,
         }}
-        className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        className="absolute bottom-6 left-1/2 hidden -translate-x-1/2 sm:block"
       >
         <ScrollLink
           to="about"
-          smooth={true}
-          duration={600}
-          offset={-70}
-          className="cursor-pointer"
+          smooth
+          duration={500}
+          offset={-80}
+          className="cursor-pointer text-xs font-medium uppercase tracking-[0.2em] text-[var(--text-muted)] transition-colors duration-200 hover:text-[var(--accent)]"
         >
-          <div className="w-12 h-12 rounded-full border border-cyan-400 flex items-center justify-center bg-white/10 backdrop-blur-xl hover:bg-cyan-400 hover:text-black transition-all duration-300">
-            <FaArrowDown />
-          </div>
+          Scroll
         </ScrollLink>
       </motion.div>
-
     </section>
   );
 }

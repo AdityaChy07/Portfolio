@@ -1,18 +1,19 @@
-import { motion } from "framer-motion";
 import { useState } from "react";
-import api from "../../services/api";
-import { toast } from "react-toastify";
-
+import axios from "axios";
+import { motion } from "framer-motion";
 import {
   FaEnvelope,
-  FaPhoneAlt,
+  FaPhone,
   FaMapMarkerAlt,
-  FaHome,
   FaGithub,
   FaLinkedin,
-  FaInstagram,
   FaPaperPlane,
+  FaCheckCircle,
 } from "react-icons/fa";
+import { toast } from "react-toastify";
+
+const API_URL =
+  import.meta.env.VITE_API_URL || "http://localhost:5000";
 
 function Contact() {
   const [formData, setFormData] = useState({
@@ -23,395 +24,434 @@ function Contact() {
   });
 
   const [loading, setLoading] = useState(false);
+  const [success, setSuccess] = useState(false);
 
   const handleChange = (e) => {
+    const { name, value } = e.target;
+
     setFormData((prev) => ({
       ...prev,
-      [e.target.name]: e.target.value,
+      [name]: value,
     }));
   };
 
-const handleSubmit = async (e) => {
-  e.preventDefault();
+  const handleSubmit = async (e) => {
+    e.preventDefault();
 
-  try {
+    if (
+      !formData.name.trim() ||
+      !formData.email.trim() ||
+      !formData.subject.trim() ||
+      !formData.message.trim()
+    ) {
+      toast.error("Please fill in all fields.");
+      return;
+    }
+
     setLoading(true);
+    setSuccess(false);
 
-    const response = await api.post("/contact", formData);
+    try {
+      await axios.post(`${API_URL}/api/contact`, formData);
 
-    toast.success(response.data.message);
+      setSuccess(true);
 
-    setFormData({
-      name: "",
-      email: "",
-      subject: "",
-      message: "",
-    });
+      toast.success("Message sent successfully!");
 
-  } catch (error) {
+      setFormData({
+        name: "",
+        email: "",
+        subject: "",
+        message: "",
+      });
 
-    toast.error(
-      error.response?.data?.message ||
-      "Unable to send message."
-    );
+      setTimeout(() => {
+        setSuccess(false);
+      }, 5000);
+    } catch (error) {
+      console.error("Contact form error:", error);
 
-    console.error(error);
-
-  } finally {
-
-    setLoading(false);
-
-  }
-};
+      toast.error(
+        error?.response?.data?.message ||
+          "Unable to send message. Please try again."
+      );
+    } finally {
+      setLoading(false);
+    }
+  };
 
   return (
     <section
       id="contact"
-      className="relative py-28 px-6 bg-[var(--bg-primary)] overflow-hidden"
+      className="bg-[var(--bg-primary)] px-4 py-20 sm:px-6 sm:py-24 lg:px-8 lg:py-28"
     >
-      {/* Background Glow */}
+      <div className="mx-auto max-w-7xl">
 
-      <div className="absolute -left-32 top-20 w-[450px] h-[450px] rounded-full bg-cyan-500/10 blur-[150px]"></div>
-
-      <div className="absolute right-0 bottom-0 w-[450px] h-[450px] rounded-full bg-purple-500/10 blur-[150px]"></div>
-
-      <div className="max-w-7xl mx-auto relative z-10">
-
-        {/* Heading */}
+        {/* =====================================================
+            HEADER
+        ====================================================== */}
 
         <motion.div
-          initial={{ opacity: 0, y: 60 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.7 }}
-          viewport={{ once: true }}
-          className="text-center mb-20"
+          initial={{
+            opacity: 0,
+            y: 20,
+          }}
+          whileInView={{
+            opacity: 1,
+            y: 0,
+          }}
+          transition={{
+            duration: 0.5,
+            ease: "easeOut",
+          }}
+          viewport={{
+            once: true,
+          }}
+          className="mb-12 max-w-3xl sm:mb-16"
         >
-          <p className="uppercase tracking-[8px] text-cyan-400 font-semibold">
+          <p className="section-label">
             Contact
           </p>
 
-          <h2 className="text-5xl md:text-6xl font-extrabold mt-4 text-[var(--text-primary)]">
-            Let's Work Together
+          <h2 className="section-title">
+            Let's Build Something Together
           </h2>
 
-          <div className="w-28 h-1 bg-cyan-400 rounded-full mx-auto mt-6"></div>
+          <div className="accent-line"></div>
 
-          <p className="max-w-3xl mx-auto mt-8 text-lg leading-8 text-[var(--text-secondary)]">
-            Whether you have an internship opportunity, a freelance project,
-            or simply want to connect, I'd love to hear from you.
-            Feel free to reach out anytime.
+          <p className="section-description">
+            Have a project idea, internship opportunity, collaboration
+            proposal, or simply want to connect? Feel free to send me a
+            message.
           </p>
-
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        {/* =====================================================
+            CONTACT GRID
+        ====================================================== */}
 
-          {/* LEFT SIDE */}
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-[0.75fr_1.25fr] lg:gap-8">
+
+          {/* =================================================
+              CONTACT INFORMATION
+          ================================================== */}
 
           <motion.div
-            initial={{ opacity: 0, x: -70 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: .8 }}
-            viewport={{ once: true }}
-            className="space-y-6"
+            initial={{
+              opacity: 0,
+              x: -20,
+            }}
+            whileInView={{
+              opacity: 1,
+              x: 0,
+            }}
+            transition={{
+              duration: 0.5,
+            }}
+            viewport={{
+              once: true,
+            }}
+            className="rounded-2xl border border-[var(--border)] bg-[var(--bg-surface)] p-6 shadow-[var(--shadow-sm)] sm:p-8"
           >
+            <p className="text-sm font-semibold text-[var(--accent)]">
+              Get in touch
+            </p>
+
+            <h3 className="mt-2 text-2xl font-bold text-[var(--text-primary)]">
+              Contact Information
+            </h3>
+
+            <p className="mt-4 text-sm leading-7 text-[var(--text-secondary)]">
+              I'm always open to discussing software development,
+              interesting projects, internships, collaborations and
+              new opportunities.
+            </p>
 
             {/* Email */}
 
-            <div className="rounded-3xl bg-white/10 backdrop-blur-xl border border-white/10 p-6 hover:border-cyan-400 transition-all duration-300">
-
-              <div className="flex items-center gap-5">
-
-                <div className="w-14 h-14 rounded-full bg-cyan-500 flex items-center justify-center">
-
-                  <FaEnvelope className="text-black text-xl" />
-
-                </div>
-
-                <div>
-
-                  <h3 className="text-xl font-bold text-[var(--text-primary)]">
-                    Email
-                  </h3>
-
-                  <a
-                    href="mailto:adityachy417@gmail.com"
-                    className="text-[var(--text-secondary)] hover:text-cyan-400 transition"
-                  >
-                    adityachy417@gmail.com
-                  </a>
-
-                </div>
-
+            <a
+              href="mailto:adityachy417@gmail.com"
+              className="mt-8 flex items-start gap-4 rounded-xl border border-[var(--border)] p-4 transition-colors duration-200 hover:border-[var(--accent)]"
+            >
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--accent-soft)] text-[var(--accent)]">
+                <FaEnvelope />
               </div>
 
-            </div>
+              <div className="min-w-0">
+                <p className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+                  Email
+                </p>
+
+                <p className="mt-1 break-all text-sm font-medium text-[var(--text-primary)]">
+                  adityachy417@gmail.com
+                </p>
+              </div>
+            </a>
 
             {/* Phone */}
 
-            <div className="rounded-3xl bg-white/10 backdrop-blur-xl border border-white/10 p-6 hover:border-cyan-400 transition-all duration-300">
-
-              <div className="flex items-center gap-5">
-
-                <div className="w-14 h-14 rounded-full bg-cyan-500 flex items-center justify-center">
-
-                  <FaPhoneAlt className="text-black text-xl" />
-
-                </div>
-
-                <div>
-
-                  <h3 className="text-xl font-bold text-[var(--text-primary)]">
-                    Phone
-                  </h3>
-
-                  <a
-                    href="tel:+919142668937"
-                    className="text-[var(--text-secondary)] hover:text-cyan-400 transition"
-                  >
-                    +91 9142668937
-                  </a>
-
-                </div>
-
+            <a
+              href="tel:+919142668937"
+              className="mt-3 flex items-start gap-4 rounded-xl border border-[var(--border)] p-4 transition-colors duration-200 hover:border-[var(--accent)]"
+            >
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--accent-soft)] text-[var(--accent)]">
+                <FaPhone />
               </div>
 
-            </div>
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+                  Phone
+                </p>
 
-            {/* Current Location */}
+                <p className="mt-1 text-sm font-medium text-[var(--text-primary)]">
+                  +91 91426 68937
+                </p>
+              </div>
+            </a>
 
-            <div className="rounded-3xl bg-white/10 backdrop-blur-xl border border-white/10 p-6 hover:border-cyan-400 transition-all duration-300">
+            {/* Location */}
 
-              <div className="flex items-center gap-5">
-
-                <div className="w-14 h-14 rounded-full bg-cyan-500 flex items-center justify-center">
-
-                  <FaMapMarkerAlt className="text-black text-xl" />
-
-                </div>
-
-                <div>
-
-                  <h3 className="text-xl font-bold text-[var(--text-primary)]">
-                    Current Location
-                  </h3>
-
-                  <p className="text-[var(--text-secondary)]">
-                    Solan, Himachal Pradesh, India
-                  </p>
-
-                </div>
-
+            <div className="mt-3 flex items-start gap-4 rounded-xl border border-[var(--border)] p-4">
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--accent-soft)] text-[var(--accent)]">
+                <FaMapMarkerAlt />
               </div>
 
-            </div>
+              <div>
+                <p className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+                  Location
+                </p>
 
-            {/* Permanent Address */}
+                <p className="mt-1 text-sm font-medium text-[var(--text-primary)]">
+                  Darbhanga, Bihar, India
+                </p>
 
-            <div className="rounded-3xl bg-white/10 backdrop-blur-xl border border-white/10 p-6 hover:border-cyan-400 transition-all duration-300">
-
-              <div className="flex items-center gap-5">
-
-                <div className="w-14 h-14 rounded-full bg-cyan-500 flex items-center justify-center">
-
-                  <FaHome className="text-black text-xl" />
-
-                </div>
-
-                <div>
-
-                  <h3 className="text-xl font-bold text-[var(--text-primary)]">
-                    Permanent Address
-                  </h3>
-
-                  <p className="text-[var(--text-secondary)]">
-                    Darbhanga, Bihar, India - 846003
-                  </p>
-
-                </div>
-
+                <p className="mt-1 text-xs text-[var(--text-muted)]">
+                  Currently studying in Himachal Pradesh
+                </p>
               </div>
-
             </div>
 
-            {/* Continue in Part 2 */}
-                        {/* Social Links */}
+            {/* Socials */}
 
-            <div className="rounded-3xl bg-white/10 backdrop-blur-xl border border-white/10 p-6 hover:border-cyan-400 transition-all duration-300">
+            <div className="mt-8 border-t border-[var(--border)] pt-6">
 
-              <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-6">
-                Connect With Me
-              </h3>
+              <p className="text-xs font-semibold uppercase tracking-wider text-[var(--text-muted)]">
+                Connect with me
+              </p>
 
-              <div className="flex gap-5">
+              <div className="mt-4 flex gap-3">
 
-                <motion.a
-                  whileHover={{ scale: 1.1, y: -4 }}
+                <a
                   href="https://github.com/AdityaChy07"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-14 h-14 rounded-full bg-slate-800 flex items-center justify-center text-2xl hover:bg-cyan-400 hover:text-black transition-all duration-300"
+                  aria-label="GitHub"
+                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border)] text-[var(--text-secondary)] transition-colors duration-200 hover:border-[var(--accent)] hover:text-[var(--accent)]"
                 >
                   <FaGithub />
-                </motion.a>
+                </a>
 
-                <motion.a
-                  whileHover={{ scale: 1.1, y: -4 }}
+                <a
                   href="https://www.linkedin.com/in/adityachy/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="w-14 h-14 rounded-full bg-slate-800 flex items-center justify-center text-2xl hover:bg-cyan-400 hover:text-black transition-all duration-300"
+                  aria-label="LinkedIn"
+                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border)] text-[var(--text-secondary)] transition-colors duration-200 hover:border-[var(--accent)] hover:text-[var(--accent)]"
                 >
                   <FaLinkedin />
-                </motion.a>
+                </a>
 
-                <motion.a
-                  whileHover={{ scale: 1.1, y: -4 }}
-                  href="https://www.instagram.com/aditya_chy19"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-14 h-14 rounded-full bg-slate-800 flex items-center justify-center text-2xl hover:bg-cyan-400 hover:text-black transition-all duration-300"
+                <a
+                  href="mailto:adityachy417@gmail.com"
+                  aria-label="Email"
+                  className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border)] text-[var(--text-secondary)] transition-colors duration-200 hover:border-[var(--accent)] hover:text-[var(--accent)]"
                 >
-                  <FaInstagram />
-                </motion.a>
+                  <FaEnvelope />
+                </a>
 
               </div>
-
             </div>
-
-            {/* Availability Card */}
-
-            <div className="rounded-3xl bg-gradient-to-r from-cyan-500/10 to-purple-500/10 backdrop-blur-xl border border-cyan-400/20 p-6">
-
-              <h3 className="text-2xl font-bold text-[var(--text-primary)] mb-4">
-                🚀 Open to Opportunities
-              </h3>
-
-              <p className="leading-8 text-[var(--text-secondary)]">
-                I'm actively looking for internship opportunities,
-                freelance projects, and full-time Software Development
-                Engineer roles where I can contribute, learn, and grow.
-              </p>
-
-            </div>
-
           </motion.div>
 
-          {/* RIGHT SIDE */}
+          {/* =================================================
+              CONTACT FORM
+          ================================================== */}
 
           <motion.div
-            initial={{ opacity: 0, x: 70 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            viewport={{ once: true }}
+            initial={{
+              opacity: 0,
+              x: 20,
+            }}
+            whileInView={{
+              opacity: 1,
+              x: 0,
+            }}
+            transition={{
+              duration: 0.5,
+            }}
+            viewport={{
+              once: true,
+            }}
+            className="rounded-2xl border border-[var(--border)] bg-[var(--bg-surface)] p-6 shadow-[var(--shadow-sm)] sm:p-8"
           >
+            {success ? (
+              <div className="flex min-h-[450px] flex-col items-center justify-center text-center">
 
-            <form
-              onSubmit={handleSubmit}
-              className="rounded-3xl bg-white/10 backdrop-blur-xl border border-white/10 p-8 space-y-6"
-            >
+                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[var(--accent-soft)] text-3xl text-[var(--accent)]">
+                  <FaCheckCircle />
+                </div>
 
-              <div>
+                <h3 className="mt-6 text-2xl font-bold text-[var(--text-primary)]">
+                  Message Sent Successfully
+                </h3>
 
-                <label className="block mb-2 font-medium text-[var(--text-primary)]">
-                  Full Name
-                </label>
+                <p className="mt-3 max-w-md text-sm leading-7 text-[var(--text-secondary)]">
+                  Thank you for reaching out. I'll get back to you as soon
+                  as possible.
+                </p>
 
-                <input
-                  type="text"
-                  name="name"
-                  placeholder="Enter your name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  required
-                  className="w-full rounded-xl border border-slate-700 bg-slate-900/70 px-5 py-4 outline-none focus:border-cyan-400 transition"
-                />
-
-              </div>
-
-              <div>
-
-                <label className="block mb-2 font-medium text-[var(--text-primary)]">
-                  Email Address
-                </label>
-
-                <input
-                  type="email"
-                  name="email"
-                  placeholder="Enter your email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  required
-                  className="w-full rounded-xl border border-slate-700 bg-slate-900/70 px-5 py-4 outline-none focus:border-cyan-400 transition"
-                />
+                <button
+                  type="button"
+                  onClick={() => setSuccess(false)}
+                  className="mt-6 rounded-lg border border-[var(--border)] px-5 py-2.5 text-sm font-semibold text-[var(--text-primary)] transition-colors duration-200 hover:border-[var(--accent)] hover:text-[var(--accent)]"
+                >
+                  Send Another Message
+                </button>
 
               </div>
+            ) : (
+              <>
+                <div className="mb-7">
 
-              <div>
+                  <p className="text-sm font-semibold text-[var(--accent)]">
+                    Send a message
+                  </p>
 
-                <label className="block mb-2 font-medium text-[var(--text-primary)]">
-                  Subject
-                </label>
+                  <h3 className="mt-2 text-2xl font-bold text-[var(--text-primary)]">
+                    Start a Conversation
+                  </h3>
 
-                <input
-                  type="text"
-                  name="subject"
-                  placeholder="Enter subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  required
-                  className="w-full rounded-xl border border-slate-700 bg-slate-900/70 px-5 py-4 outline-none focus:border-cyan-400 transition"
-                />
+                </div>
 
-              </div>
+                <form
+                  onSubmit={handleSubmit}
+                  className="space-y-5"
+                >
 
-              <div>
+                  {/* Name + Email */}
 
-                <label className="block mb-2 font-medium text-[var(--text-primary)]">
-                  Message
-                </label>
+                  <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
 
-                <textarea
-                  rows="6"
-                  name="message"
-                  placeholder="Write your message..."
-                  value={formData.message}
-                  onChange={handleChange}
-                  required
-                  className="w-full rounded-xl border border-slate-700 bg-slate-900/70 px-5 py-4 outline-none focus:border-cyan-400 transition resize-none"
-                />
+                    <div>
+                      <label
+                        htmlFor="name"
+                        className="mb-2 block text-sm font-medium text-[var(--text-primary)]"
+                      >
+                        Name
+                      </label>
 
-              </div>
+                      <input
+                        id="name"
+                        name="name"
+                        type="text"
+                        value={formData.name}
+                        onChange={handleChange}
+                        placeholder="Your name"
+                        className="w-full rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] px-4 py-3 text-sm text-[var(--text-primary)] outline-none placeholder:text-[var(--text-muted)] transition-colors duration-200 focus:border-[var(--accent)]"
+                      />
+                    </div>
 
-              <motion.button
-                whileHover={{
-                  scale: 1.03,
-                }}
-                whileTap={{
-                  scale: 0.98,
-                }}
-                type="submit"
-                disabled={loading}
-                className="w-full flex items-center justify-center gap-3 rounded-xl bg-gradient-to-r from-cyan-400 to-blue-500 py-4 text-black font-bold hover:shadow-[0_0_30px_rgba(34,211,238,0.45)] transition-all duration-300 disabled:opacity-70"
-              >
-                {loading ? (
-                  "Sending..."
-                ) : (
-                  <>
-                    <FaPaperPlane />
-                    Send Message
-                  </>
-                )}
-              </motion.button>
+                    <div>
+                      <label
+                        htmlFor="email"
+                        className="mb-2 block text-sm font-medium text-[var(--text-primary)]"
+                      >
+                        Email
+                      </label>
 
-            </form>
+                      <input
+                        id="email"
+                        name="email"
+                        type="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        placeholder="you@example.com"
+                        className="w-full rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] px-4 py-3 text-sm text-[var(--text-primary)] outline-none placeholder:text-[var(--text-muted)] transition-colors duration-200 focus:border-[var(--accent)]"
+                      />
+                    </div>
 
+                  </div>
+
+                  {/* Subject */}
+
+                  <div>
+                    <label
+                      htmlFor="subject"
+                      className="mb-2 block text-sm font-medium text-[var(--text-primary)]"
+                    >
+                      Subject
+                    </label>
+
+                    <input
+                      id="subject"
+                      name="subject"
+                      type="text"
+                      value={formData.subject}
+                      onChange={handleChange}
+                      placeholder="What would you like to discuss?"
+                      className="w-full rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] px-4 py-3 text-sm text-[var(--text-primary)] outline-none placeholder:text-[var(--text-muted)] transition-colors duration-200 focus:border-[var(--accent)]"
+                    />
+                  </div>
+
+                  {/* Message */}
+
+                  <div>
+                    <label
+                      htmlFor="message"
+                      className="mb-2 block text-sm font-medium text-[var(--text-primary)]"
+                    >
+                      Message
+                    </label>
+
+                    <textarea
+                      id="message"
+                      name="message"
+                      rows="6"
+                      value={formData.message}
+                      onChange={handleChange}
+                      placeholder="Tell me about your project, opportunity or idea..."
+                      className="w-full resize-none rounded-lg border border-[var(--border)] bg-[var(--bg-secondary)] px-4 py-3 text-sm leading-7 text-[var(--text-primary)] outline-none placeholder:text-[var(--text-muted)] transition-colors duration-200 focus:border-[var(--accent)]"
+                    />
+                  </div>
+
+                  {/* Submit */}
+
+                  <button
+                    type="submit"
+                    disabled={loading}
+                    className="inline-flex w-full items-center justify-center gap-2 rounded-lg bg-[var(--accent)] px-6 py-3.5 text-sm font-semibold text-white transition-colors duration-200 hover:bg-[var(--accent-hover)] disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto"
+                  >
+                    {loading ? (
+                      <>
+                        <span className="h-4 w-4 animate-spin rounded-full border-2 border-white/40 border-t-white"></span>
+                        Sending...
+                      </>
+                    ) : (
+                      <>
+                        <FaPaperPlane />
+                        Send Message
+                      </>
+                    )}
+                  </button>
+
+                </form>
+              </>
+            )}
           </motion.div>
 
         </div>
 
       </div>
-
     </section>
   );
 }

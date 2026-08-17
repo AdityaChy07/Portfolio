@@ -1,11 +1,7 @@
 import { useEffect, useState } from "react";
 import { Link as ScrollLink } from "react-scroll";
-
 import { HiMenu, HiX } from "react-icons/hi";
 import { FaMoon, FaSun } from "react-icons/fa";
-
-import { motion } from "framer-motion";
-
 import { useTheme } from "../../context/ThemeContext";
 
 const navLinks = [
@@ -18,165 +14,155 @@ const navLinks = [
 ];
 
 function Navbar() {
-
   const [open, setOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
-
     const handleScroll = () => {
-      setScrolled(window.scrollY > 40);
+      setScrolled(window.scrollY > 20);
     };
 
     window.addEventListener("scroll", handleScroll);
 
-    return () => window.removeEventListener("scroll", handleScroll);
-
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
   }, []);
 
-  return (
+  useEffect(() => {
+    const handleResize = () => {
+      if (window.innerWidth >= 1024) {
+        setOpen(false);
+      }
+    };
 
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const closeMenu = () => {
+    setOpen(false);
+  };
+
+  return (
     <header
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-colors duration-200 ${
         scrolled
-          ? "bg-slate-950/80 backdrop-blur-xl border-b border-slate-800 shadow-xl"
+          ? "border-b border-[var(--border)] bg-[var(--navbar-bg)] backdrop-blur-md"
           : "bg-transparent"
       }`}
     >
-
-      <nav className="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
-
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 sm:px-6 lg:px-8">
         {/* Logo */}
-
-        <motion.h1
-          whileHover={{
-            scale: 1.08,
-          }}
-          className="text-3xl md:text-4xl font-extrabold cursor-pointer"
+        <ScrollLink
+          to="hero"
+          smooth
+          duration={500}
+          offset={-80}
+          onClick={closeMenu}
+          className="cursor-pointer text-2xl font-bold tracking-tight text-[var(--text-primary)] sm:text-3xl"
         >
-          Aditya
-          <span className="text-cyan-400">.</span>
-        </motion.h1>
+          Aditya<span className="text-[var(--accent)]">.</span>
+        </ScrollLink>
 
-        {/* Desktop Menu */}
-
-        <ul className="hidden lg:flex items-center gap-8">
-
+        {/* Desktop Navigation */}
+        <div className="hidden items-center gap-7 lg:flex">
           {navLinks.map((item) => (
-
-            <li key={item.to}>
-
-              <ScrollLink
-                to={item.to}
-                smooth={true}
-                duration={600}
-                offset={-80}
-                spy={true}
-                activeClass="text-cyan-400"
-                className="relative cursor-pointer text-gray-300 hover:text-cyan-400 transition-all duration-300 font-medium after:absolute after:left-0 after:-bottom-1 after:h-[2px] after:w-0 after:bg-cyan-400 hover:after:w-full after:transition-all after:duration-300"
-              >
-                {item.name}
-              </ScrollLink>
-
-            </li>
-
+            <ScrollLink
+              key={item.to}
+              to={item.to}
+              smooth
+              duration={500}
+              offset={-80}
+              spy
+              activeClass="text-[var(--accent)]"
+              className="cursor-pointer text-sm font-medium text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--text-primary)]"
+            >
+              {item.name}
+            </ScrollLink>
           ))}
 
           {/* Resume */}
-
           <a
             href="/resume.pdf"
             download
-            className="px-6 py-2 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 text-black font-semibold hover:scale-105 hover:shadow-[0_0_30px_rgba(34,211,238,0.35)] transition-all duration-300"
+            className="rounded-lg border border-[var(--accent)] px-4 py-2 text-sm font-semibold text-[var(--accent)] transition-colors duration-200 hover:bg-[var(--accent)] hover:text-white"
           >
             Resume
           </a>
 
-          {/* Theme Toggle */}
-
+          {/* Theme */}
           <button
+            type="button"
             onClick={toggleTheme}
-            className="w-11 h-11 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center transition-all duration-300 hover:rotate-180"
+            aria-label="Toggle theme"
+            className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--bg-surface)] text-[var(--text-secondary)] transition-colors duration-200 hover:border-[var(--border-hover)] hover:text-[var(--accent)]"
           >
-            {theme === "dark" ? (
-              <FaSun className="text-yellow-400" />
-            ) : (
-              <FaMoon className="text-cyan-400" />
-            )}
+            {theme === "dark" ? <FaSun size={15} /> : <FaMoon size={15} />}
+          </button>
+        </div>
+
+        {/* Mobile / Tablet controls */}
+        <div className="flex items-center gap-2 lg:hidden">
+          <button
+            type="button"
+            onClick={toggleTheme}
+            aria-label="Toggle theme"
+            className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--bg-surface)] text-[var(--text-secondary)] transition-colors duration-200 hover:text-[var(--accent)]"
+          >
+            {theme === "dark" ? <FaSun size={15} /> : <FaMoon size={15} />}
           </button>
 
-        </ul>
-
-        {/* Mobile Menu Button */}
-
-        <button
-          onClick={() => setOpen(!open)}
-          className="lg:hidden text-3xl"
-        >
-          {open ? <HiX /> : <HiMenu />}
-        </button>
-
+          <button
+            type="button"
+            onClick={() => setOpen((prev) => !prev)}
+            aria-label={open ? "Close navigation menu" : "Open navigation menu"}
+            aria-expanded={open}
+            className="flex h-10 w-10 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--bg-surface)] text-[var(--text-primary)]"
+          >
+            {open ? <HiX size={22} /> : <HiMenu size={22} />}
+          </button>
+        </div>
       </nav>
-            {/* Mobile Menu */}
 
+      {/* Mobile / Tablet Menu */}
       {open && (
-        <motion.div
-          initial={{ opacity: 0, y: -30 }}
-          animate={{ opacity: 1, y: 0 }}
-          exit={{ opacity: 0, y: -30 }}
-          transition={{ duration: 0.3 }}
-          className="lg:hidden bg-slate-950/95 backdrop-blur-xl border-t border-slate-800"
-        >
-          <ul className="flex flex-col items-center gap-6 py-8">
-
-            {navLinks.map((item) => (
-              <li key={item.to}>
-
+        <div className="border-t border-[var(--border)] bg-[var(--bg-secondary)] lg:hidden">
+          <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6">
+            <div className="flex flex-col gap-1">
+              {navLinks.map((item) => (
                 <ScrollLink
+                  key={item.to}
                   to={item.to}
-                  smooth={true}
-                  duration={600}
+                  smooth
+                  duration={500}
                   offset={-80}
-                  spy={true}
-                  onClick={() => setOpen(false)}
-                  className="cursor-pointer text-lg text-gray-300 hover:text-cyan-400 transition-all duration-300"
+                  spy
+                  activeClass="text-[var(--accent)] bg-[var(--accent-soft)]"
+                  onClick={closeMenu}
+                  className="cursor-pointer rounded-lg px-4 py-3 text-sm font-medium text-[var(--text-secondary)] transition-colors duration-200 hover:bg-[var(--accent-soft)] hover:text-[var(--accent)]"
                 >
                   {item.name}
                 </ScrollLink>
+              ))}
 
-              </li>
-            ))}
-
-            {/* Resume Button */}
-
-            <a
-              href="/resume.pdf"
-              download
-              onClick={() => setOpen(false)}
-              className="px-6 py-3 rounded-full bg-gradient-to-r from-cyan-400 to-blue-500 text-black font-semibold hover:scale-105 transition-all duration-300"
-            >
-              Download Resume
-            </a>
-
-            {/* Theme Toggle */}
-
-            <button
-              onClick={toggleTheme}
-              className="w-12 h-12 rounded-full bg-slate-800 hover:bg-slate-700 flex items-center justify-center transition-all duration-300 hover:rotate-180"
-            >
-              {theme === "dark" ? (
-                <FaSun className="text-yellow-400 text-xl" />
-              ) : (
-                <FaMoon className="text-cyan-400 text-xl" />
-              )}
-            </button>
-
-          </ul>
-        </motion.div>
+              <a
+                href="/resume.pdf"
+                download
+                onClick={closeMenu}
+                className="mt-2 rounded-lg bg-[var(--accent)] px-4 py-3 text-center text-sm font-semibold text-white transition-colors duration-200 hover:bg-[var(--accent-hover)]"
+              >
+                Download Resume
+              </a>
+            </div>
+          </div>
+        </div>
       )}
-
     </header>
   );
 }
