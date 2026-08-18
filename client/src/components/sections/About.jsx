@@ -15,12 +15,12 @@ const stats = [
     icon: <FaLaptopCode />,
   },
   {
-    number: "12+",
+    number: "10+",
     label: "Technologies",
     icon: <FaCode />,
   },
   {
-    number: "100+",
+    number: "250+",
     label: "Hours Coding",
     icon: <FaCode />,
   },
@@ -86,7 +86,7 @@ function About() {
           <div className="accent-line"></div>
 
           <p className="section-description">
-            I'm Aditya Choudhary, a Computer Science Engineering student
+            I'm Aditya , a Computer Science Engineering student
             specializing in Full Stack Software Development. I enjoy turning
             ideas into reliable software and continuously improving my
             engineering, problem-solving and analytical skills.
@@ -122,8 +122,8 @@ function About() {
             </p>
 
             <p className="mt-5 text-base leading-8 text-[var(--text-secondary)] sm:text-lg">
-              Alongside full-stack development, I actively explore Artificial
-              Intelligence, Machine Learning, Data Analytics and Data
+              Alongside full-stack development, I actively explore 
+              Data Analytics and Data
               Structures & Algorithms.
             </p>
 

@@ -145,7 +145,7 @@ function Footer() {
         <div className="flex flex-col gap-4 text-sm text-[var(--text-muted)] sm:flex-row sm:items-center sm:justify-between">
 
           <p>
-            © {currentYear} Aditya Choudhary. All rights reserved.
+            © {currentYear} Aditya Kumar Anshu. All rights reserved.
           </p>
 
           <div className="flex items-center gap-1">

@@ -45,7 +45,7 @@ function Hero() {
           <h1 className="max-w-4xl text-4xl font-extrabold leading-[1.08] tracking-tight text-[var(--text-primary)] sm:text-5xl md:text-6xl lg:text-7xl">
             Hi, I'm{" "}
             <span className="text-[var(--accent)]">
-              Aditya Choudhary
+              Aditya Kumar Anshu
             </span>
           </h1>
 
